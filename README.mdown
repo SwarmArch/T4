@@ -1,0 +1,8 @@
+# T4: Compiling Sequential Code for Effective Speculative Parallelization in Hardware
+
+Code and instructions for getting started with the T4 compiler will be added to this repository by June 1, 2020,
+which is the date at which our paper was to be presented at ISCA 2020.
+As the conference format has changed due to COVID-19,
+the conference talk has been recorded and is already available to view to conference attendees on Whova.
+If you are interested in learning more, please see the video talk and attend the live Q&A session
+for the the first paper in session 2B of ISCA 2020.
