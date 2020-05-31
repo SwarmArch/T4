@@ -1,0 +1,14 @@
+[submodule "compiler"]
+	path = compiler
+	url = git@github.com:SwarmArch/Swarm-LLVM.git
+	branch = master
+	update = merge
+[submodule "simulator"]
+	path = simulator
+	url = git@github.com:SwarmArch/sim.git
+	branch = master
+	update = merge
+[submodule "swarm_runtime"]
+	path = swarm_runtime
+	url = git@github.com:SwarmArch/runtime.git
+	branch = master
