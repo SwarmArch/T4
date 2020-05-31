@@ -1,0 +1,32 @@
+import os
+
+Import('env')
+
+env = env.Clone()
+env.Append(CPPFLAGS=['-Werror=unknown-attributes'])
+
+if not GetOption('no_insert_heartbeats'):
+    env.Append(LLVMFLAGS = ['-swarm-insertheartbeats'])
+
+autoEnv = env.Clone()
+autoEnv.Append(LLVMFLAGS = ['-auto-swarmify'])
+
+excludes = ["*_mod[0-9]*.c[p]*"]
+programs = [
+        os.path.splitext(f.name)[0]
+        # Exclude files that end in *_mod1.cpp etc.
+        for f in Glob("*.cpp", exclude=excludes)
+        ]
+
+for program in programs:
+    localEnv = autoEnv if program.endswith('_auto') else env
+    source_list = ([program + '.cpp']
+                   + Glob(program + "*_mod[0-9]*.cpp")
+                   + Glob(program + "*_mod[0-9]*.c")
+                   )
+    obj_list = localEnv.Object(source=source_list)
+
+    localEnv.Program(target=program, source=obj_list)
+
+env.Command("run.py", "run_all.py", [Copy("$TARGET", "$SOURCE"),
+            Chmod("$TARGET", 0o755)])

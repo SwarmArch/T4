@@ -1,0 +1,53 @@
+/build/
+/.sconsign.dblite
+/.sconf_temp/
+/inputs
+/config.log
+/run/specScripts/
+/compile_commands.json
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Pin-generated *.d files or dependency files generated for Make
+*.d
+
+# Python bytecode
+*.pyc
+
+# Output files from local simulation runs
+*.out
+*.h5
+*.log
+heartbeat
+out.cfg
+
+# Temp files created by most text editors.
+*~
+# vim swap files
+.*.sw?
+.sw?
+
+# Merge files created by git.
+*.orig
+
+# Other tool-generated files
+gmon.out
+tags
+
+# User's custom project- or directory-specific editor configs
+.vimrc
+.vscode
+
+.DS_Store
+.nfs0000000*

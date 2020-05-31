@@ -1,8 +1,75 @@
 # T4: Compiling Sequential Code for Effective Speculative Parallelization in Hardware
 
-Code and instructions for getting started with the T4 compiler will be added to this repository by June 1, 2020,
-which is the date at which our paper was to be presented at ISCA 2020.
-As the conference format has changed due to COVID-19,
-the conference talk has been recorded and is already available to view to conference attendees on Whova.
-If you are interested in learning more, please see the video talk and attend the live Q&A session
-for the the first paper in session 2B of ISCA 2020.
+![Task tree and results plot](TaskTreeAndResults.png)
+
+This repository holds the code released to accompany the paper by
+Victor A. Ying, Mark C. Jeffrey, and Daniel Sanchez
+at the 47th Annual International Symposium on Computer Architecture (ISCA), June 2020.
+
+This code release centers around T4, the first compiler released as part of SCC,
+a project to develop compiler toolchains for [the Swarm architecture](http://swarm.csail.mit.edu).
+T4 parallelizes C and C++ programs while maintaining purely sequential semantics.
+
+## Getting started with the T4 compiler
+
+When cloning this repository, pass the `--recursive` option to `git clone`.
+Or, after cloning this repository, run the following command in this repository:
+```bash
+git submodule update --init --remote --recursive
+```
+to obtain all the code for the compiler and simulator.
+
+Read and follow `simulator/README.md` to build the Swarm hardware simulator
+and run a small example Swarm program to verify if the simulator works.
+Then, see `compiler/README.md` and `compiler/setup.sh` to build the compiler.
+After you build the compiler and set your `PATH` using `compiler/env.sh`,
+you can compile a parallelized version of all the test programs in
+the `microbenchmarks` directory by running the following command in the
+root directory of this repository:
+```bash
+scons
+```
+You may want to use the `-j` option of `scons` to parallelize the compilation.
+You can pass `--scc-remarks` to `scons` to receive some information
+about the code transformations the compiler is performing for parallelization.
+
+Then, you can run one of the test programs as follows:
+```bash
+simulator/build/opt/sim/sim -config configs/64c.cfg -- build/scc/microbenchmarks/single_loop_auto
+```
+The directory `configs` holds configuration files for the simulator.
+These configuration files will simulate systems with 4-wide superscalar
+out-of-order cores, as described in the T4 paper.
+
+### Running T4 tasks without simulation
+
+When developing and debugging compiler optimizations, it is often useful to run
+the output of the compiler natively, without simulation.  This lets you verify
+if your compiler is working correctly without the simulator.  It also allows
+for easily examining the execution of the compiled application using debuggers
+and tracing tools.  To facilitate this, the compiler can generate code that
+uses a software priority queue to schedule tasks, executing them serially,
+instead of using hardware features implemented by the simulator.  You can build
+a version of the applications that is compiled into parallelizable tasks but
+executes serially and natively by running the command:
+```bash
+scons runtime=scc_serial --allocator=native
+```
+Then, you can run any of the resulting binaries without using the simulator.
+For example:
+```bash
+build/scc_serial/microbenchmarks/native_single_loop_auto
+```
+
+## License and copyright
+
+These repositories hold free software; you can redistribute the software and/or
+modify it under the terms of the license included in the root directory of each
+particular git repository or submodule.  The license for particular files is
+also referenced at the top of most files.  In particular, the Swarm simulator
+is available under the GNU General Public License as published by the Free
+Software Foundation, version 2.  Meanwhile, the T4 compiler is based on
+LLVM/Clang 5.0, so it adopts the UIUC/NCSA license from that project.
+
+If you use SCC in your research, we ask that you cite the T4 paper in your
+publications and that you send a citation of your work to swarm@csail.mit.edu.

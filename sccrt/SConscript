@@ -1,0 +1,24 @@
+Import('runtime')
+
+import os
+
+# TODO(mcj) should this import a stripped-down environment from the SConstruct?
+env = Environment(ENV = os.environ)
+env['CC'] = 'clang'
+env['CXX'] = 'clang++'
+env.Append(CPPPATH = [os.path.join(Dir('.').srcnode().up().abspath, 'swarm_runtime' ,'include')])
+env.Append(CPPPATH = [os.path.join(Dir('.').srcnode().up().abspath, 'include')])
+env.Append(CPPFLAGS = ['-Wall', '-Wextra', '-Werror', '-O3', '-gdwarf-3',])
+env.Append(CPPFLAGS = ['-fno-exceptions'])
+env.Append(CPPDEFINES = ['NASSERT', 'NDEBUG'])
+
+if runtime == 'scc_serial':
+    env.Append(CPPDEFINES = ['SCCRT_SERIAL_IMPL'])
+else:
+    env.Append(CPPDEFINES = ['SWARM_RUNTIME'])
+
+env.Append(CPPFLAGS = ['-std=c++14',])
+
+libsccrt = env.StaticLibrary(target='sccrt', source=Glob('*.cpp'))
+
+Return('libsccrt')
