@@ -2,9 +2,12 @@
 
 ![Task tree and results plot](TaskTreeAndResults.png)
 
-This repository holds the code released to accompany the paper by
+This repository holds the code released to accompany
+[the paper](https://www.victoraying.com/publication/t4/)
+by
 Victor A. Ying, Mark C. Jeffrey, and Daniel Sanchez
-at the 47th Annual International Symposium on Computer Architecture (ISCA), June 2020.
+presented at
+[the 47th Annual International Symposium on Computer Architecture (ISCA)](https://www.iscaconf.org/isca2020/program/), June 2020.
 
 This code release centers around T4, the first compiler released as part of SCC,
 a project to develop compiler toolchains for [the Swarm architecture](http://swarm.csail.mit.edu).
