@@ -12,7 +12,7 @@ T4 parallelizes C and C++ programs while maintaining purely sequential semantics
 
 ## Getting started with the T4 compiler
 
-When cloning this repository, pass the `--recursive` option to `git clone`.
+When cloning this repository, pass the `--recurse-submodules` option to `git clone`.
 Or, after cloning this repository, run the following command in this repository:
 ```bash
 git submodule update --init --remote --recursive
