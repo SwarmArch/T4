@@ -1,9 +1,9 @@
 [submodule "compiler"]
 	path = compiler
-	url = git@github.com:SwarmArch/Swarm-LLVM.git
+	url = https://github.com/SwarmArch/Swarm-LLVM.git
 [submodule "simulator"]
 	path = simulator
-	url = git@github.com:SwarmArch/sim.git
+	url = https://github.com/SwarmArch/sim.git
 [submodule "swarm_runtime"]
 	path = swarm_runtime
-	url = git@github.com:SwarmArch/runtime.git
+	url = https://github.com/SwarmArch/runtime.git
